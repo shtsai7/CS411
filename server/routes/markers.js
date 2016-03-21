@@ -9,6 +9,7 @@ var Marker = new Schema({
     username: String,
     title: String,
     description: String,
+    type: String,
     votes: Number,
     latitude: Number,
     longitude: Number
