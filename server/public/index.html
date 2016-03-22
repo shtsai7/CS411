@@ -1,0 +1,25 @@
+
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.js"></script>
+    <script src="../javascript/location.js"></script>
+
+
+    <meta charset="UTF-8">
+    <title>Hello</title>
+</head>
+<body ng-app="myApp">
+    <h1>HELLO</h1>
+    <div ng-controller="geoCtrl">
+        <p>
+            <input ng-model="name"/>
+            <button ng-click="geoFindMe()">Show my location</button>
+        </p>
+    </div>
+
+    <div id="out">
+
+    </div>
+
+</body>
+</html>
