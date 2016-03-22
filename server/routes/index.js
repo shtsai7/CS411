@@ -4,7 +4,10 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'CS411A2', status: 'ok' });
+//  res.render('index', { title: 'CS411A2', status: 'ok' });
 });
 
+
+
 module.exports = router;
+
