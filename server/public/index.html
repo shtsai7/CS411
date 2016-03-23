@@ -1,4 +1,3 @@
-
 <html>
 <head>
 
@@ -7,24 +6,17 @@
 
 
     <meta charset="UTF-8">
-    <title>Hello</title>
+    <title>Add Markers</title>
 </head>
 <body ng-app="myApp">
-    <h1>HELLO</h1>
+    <h1>Add Markers</h1>
     <div ng-controller="geoCtrl">
         <p>
-            Latitude = <input ng-model="latitude"/>
-        </p>
-        <p>
-            Longitude = <input ng-model="longitude"/>
-        </p>
-
-        <p>
+            Latitude: <input ng-model="latitude"/> <br>
+            Longitude: <input ng-model="longitude"/> <br>
             <button ng-click="geoFindMe()">Show my location</button>
             <p>{{latitude}}</p>
             <p>{{longitude}}</p>
-            <input ng-model="name"/>
-            <button ng-click="geoFindMe()">Show my location</button>
         </p>
     </div>
 
