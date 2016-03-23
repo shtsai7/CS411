@@ -1,36 +1,22 @@
-
 <html>
 <head>
-<<<<<<< HEAD
-=======
 
->>>>>>> sean-branch
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.js"></script>
     <script src="../javascript/location.js"></script>
 
 
     <meta charset="UTF-8">
-    <title>Hello</title>
+    <title>Add Markers</title>
 </head>
 <body ng-app="myApp">
-    <h1>HELLO</h1>
+    <h1>Add Markers</h1>
     <div ng-controller="geoCtrl">
         <p>
-<<<<<<< HEAD
-=======
-            Latitude = <input ng-model="latitude"/>
-        </p>
-        <p>
-            Longitude = <input ng-model="longitude"/>
-        </p>
-
-        <p>
+            Latitude: <input ng-model="latitude"/> <br>
+            Longitude: <input ng-model="longitude"/> <br>
             <button ng-click="geoFindMe()">Show my location</button>
             <p>{{latitude}}</p>
             <p>{{longitude}}</p>
->>>>>>> sean-branch
-            <input ng-model="name"/>
-            <button ng-click="geoFindMe()">Show my location</button>
         </p>
     </div>
 

@@ -25,8 +25,8 @@ myApp.controller('geoCtrl', function($scope) {
             $scope.latitude = latitude;
             $scope.longitude = longitude;
     
-            output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
-    
+            output.innerHTML = '<p>Latitude is ' + $scope.latitude + '° <br>Longitude is ' + $scope.longitude + '°</p>';
+
             var img = new Image();
             img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + $scope.latitude + "," + $scope.longitude + "&zoom=13&size=300x300&sensor=false";
     
