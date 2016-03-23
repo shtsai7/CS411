@@ -2,7 +2,6 @@
 <html>
 <head>
 
-
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.js"></script>
     <script src="../javascript/location.js"></script>
 
@@ -24,6 +23,8 @@
             <button ng-click="geoFindMe()">Show my location</button>
             <p>{{latitude}}</p>
             <p>{{longitude}}</p>
+            <input ng-model="name"/>
+            <button ng-click="geoFindMe()">Show my location</button>
         </p>
     </div>
 
