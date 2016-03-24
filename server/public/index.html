@@ -1,27 +1,26 @@
 <html>
 <head>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.js"></script>
-    <script src="../javascript/location.js"></script>
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPWzKLkH_TcLKa1yDs6oIZeQQdZ7Y8v0A"></script>
+    <script src="../javascript/location.js"></script>
 
     <meta charset="UTF-8">
     <title>Add Markers</title>
 </head>
 <body ng-app="myApp">
     <h1>Add Markers</h1>
-    <div ng-controller="geoCtrl">
+    <div ng-controller="geoCtrl" ng-init="initMap()">
         <p>
             Latitude: <input ng-model="latitude"/> <br>
             Longitude: <input ng-model="longitude"/> <br>
+            <button ng-click="refresh()">Use this location</button>
             <button ng-click="geoFindMe()">Show my location</button>
-            <p>{{latitude}}</p>
-            <p>{{longitude}}</p>
+            <div id="out"></div>
+            <div id="map"></div>
         </p>
-    </div>
-
-    <div id="out">
-
     </div>
 
 </body>
