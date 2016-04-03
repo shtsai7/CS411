@@ -19,12 +19,12 @@ myApp.controller('geoCtrl', function($scope,$http) {
         var options = {
             center: {lat: $scope.latitude, lng: $scope.longitude},
             zoom: 3
-        }
+        };
         map = new google.maps.Map(document.getElementById('map'), options);
 
-    }
+    };
 
-    $scope.refresh = function() {
+    $scope.refreshMap = function() {
         console.log("inside initMap");
 
         var latitude = parseFloat($scope.latitude);
@@ -34,15 +34,15 @@ myApp.controller('geoCtrl', function($scope,$http) {
             var map;
             var options = {
                 center: {lat: latitude, lng: longitude},
-                zoom: 13
-            }
+                zoom: 10
+            };
             map = new google.maps.Map(document.getElementById('map'), options);
             document.getElementById("out").innerHTML = "";
         } else {
             document.getElementById("out").innerHTML = "<p>The input is invalid.</p>";
         }
 
-    }
+    };
 
     $scope.geoFindMe = function() {
         console.log("inside geolocate controller");
@@ -62,26 +62,26 @@ myApp.controller('geoCtrl', function($scope,$http) {
     
             output.innerHTML = '';
 
-            $scope.refresh();
+            $scope.refreshMap();
 
-        };
+        }
     
         function error() {
             output.innerHTML = "Unable to get your location";
-        };
+        }
     
         output.innerHTML = "<p>Locating…</p>";
     
         navigator.geolocation.getCurrentPosition(success, error);
-    }
+    };
 
     $scope.show = function() {
-        var name = $scope.name
-        var url = "/" + name
+        var name = $scope.name;
+        var url = "/" + name;
         $http.get(url).then(function(response) {
             $scope.welcome = response.data;
         });
-    }
+    };
 
     $scope.wikiInfo = function() {
         //var url = "https://en.wikipedia.org/w/api.php?action=query&list=geosearch&gscoord=37.786952%7C-122.399523&gsradius=10000&gslimit=10"
@@ -120,26 +120,46 @@ myApp.controller('geoCtrl', function($scope,$http) {
             error: function (errorMessage) {
             }
         });
-    }
+
+    };
 
     $scope.wikiGeo = function() {
-//        var url = "https://en.wikipedia.org/w/api.php?action=query&list=geosearch&gscoord=37.786952%7C-122.399523&gsradius=10000&gslimit=10"
+        var lat = $scope.latitude;
+        var lon = $scope.longitude;
 
+        var latS = lat.toString();
+        var lonS = lon.toString();
+
+        var url = "https://en.wikipedia.org/w/api.php?action=query&format=json&list=geosearch&gscoord=" +
+            latS +
+            "|" +
+            lonS +
+            "&gsradius=10000&gslimit=20&callback=?";
+        
         $.ajax({
             type: "GET",
-            url: "https://en.wikipedia.org/w/api.php?action=query&format=json&list=geosearch&gscoord=42.3482342%7C-71.1173125&gsradius=10000&gslimit=20&callback=?",
+//            url: "https://en.wikipedia.org/w/api.php?action=query&format=json&list=geosearch&gscoord=42.3482342%7C-71.1173125&gsradius=10000&gslimit=20&callback=?",
+            url: url,
             contentType: "application/json; charset=utf-8",
             async: false,
             dataType: "json",
             success: function (data, textStatus, jqXHR) {
                 console.log(data);
                 $scope.queries = data.query.geosearch;
-                console.log($scope.queries)
+                console.log($scope.queries);
+
             },
             error: function (errorMessage) {
             }
         });
 
-    }
+
+
+    };
+
+    $scope.refresh = function() {
+        var welcome = document.getElementById("welcome");
+        welcome.innerHTML = "Here are your results!";
+    };
 
 });

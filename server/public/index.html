@@ -22,7 +22,7 @@
         <p>
             Latitude: <input ng-model="latitude"/> <br>
             Longitude: <input ng-model="longitude"/> <br>
-            <button ng-click="refresh()">Use this location</button>
+            <button ng-click="refreshMap()">Use this location</button>
             <button ng-click="geoFindMe()">Show my location</button>
 
             <div id="out"></div>
@@ -39,6 +39,7 @@
         <p>
             <button ng-click="wikiGeo()">wikiGeo</button> <br>
             <div id="wikiGeoResult">
+                <div id="welcome">Welcome</div>
                 <table>
                     <th> title </th>
                     <th>Page ID</th>
@@ -51,6 +52,7 @@
                         <td>{{query.lon}}</td>
                     </tr>
                 </table>
+
 
             </div>
         </p>
