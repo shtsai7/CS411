@@ -9,6 +9,12 @@ myApp.controller('geoCtrl', function($scope,$http) {
 
     console.log("inside geolocate controller");
 
+    /*
+        Initialize map when open page
+
+        Google Map API documentation
+        https://developers.google.com/maps/documentation/javascript/tutorial#Loading_the_Maps_API
+     */
     $scope.initMap = function() {
         console.log("inside initMap");
 
@@ -24,6 +30,7 @@ myApp.controller('geoCtrl', function($scope,$http) {
 
     };
 
+    // refresh map to center at the input coordinate
     $scope.refreshMap = function() {
         console.log("inside initMap");
 
@@ -44,6 +51,12 @@ myApp.controller('geoCtrl', function($scope,$http) {
 
     };
 
+    /*
+        Obtain the coordinates of the user
+
+        Geolocation API documentation
+        https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/Using_geolocation
+     */
     $scope.geoFindMe = function() {
         console.log("inside geolocate controller");
         var output = document.getElementById("out");
@@ -75,6 +88,7 @@ myApp.controller('geoCtrl', function($scope,$http) {
         navigator.geolocation.getCurrentPosition(success, error);
     };
 
+
     $scope.show = function() {
         var name = $scope.name;
         var url = "/" + name;
@@ -83,14 +97,29 @@ myApp.controller('geoCtrl', function($scope,$http) {
         });
     };
 
+
+    /*
+     retrieve wikiInfo based on pageID
+
+     MediaWiki API documentation page
+     https://en.wikipedia.org/w/api.php?action=help&modules=parse
+
+
+     used code for cleaning up text from this page
+     http://www.9bitstudios.com/2014/03/getting-data-from-the-wikipedia-api-using-jquery/
+     */
     $scope.wikiInfo = function() {
-        //var url = "https://en.wikipedia.org/w/api.php?action=query&list=geosearch&gscoord=37.786952%7C-122.399523&gsradius=10000&gslimit=10"
-        var url = "https://en.wikipedia.org/w/api.php?action=query&titles=Main%20Page&prop=revisions&rvprop=content&format=json"
+
+
+
+        var pageID = $scope.pageID;
+        var url = "http://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&pageid=" +
+                pageID + "&callback=?";
+
 
         $.ajax({
             type: "GET",
-            url: "http://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=0&page=boston&callback=?",
-//            url: "https://en.wikipedia.org/w/api.php?action=query&titles=Main%20Page&prop=revisions&rvprop=content&format=json&callback=?",
+            url: url,
             contentType: "application/json; charset=utf-8",
             async: false,
             dataType: "json",
@@ -98,10 +127,7 @@ myApp.controller('geoCtrl', function($scope,$http) {
                 console.log(data);
                 $scope.welcome = data;
 
-                /*
-                    used code for cleaning up text
-                    http://www.9bitstudios.com/2014/03/getting-data-from-the-wikipedia-api-using-jquery/
-                 */
+
                 var markup = data.parse.text["*"];
                 var blurb = $('<div></div>').html(markup);
 
@@ -123,6 +149,12 @@ myApp.controller('geoCtrl', function($scope,$http) {
 
     };
 
+    /*
+        Find nearby records by using wikiGeo search API
+
+        Geosearch API Documentation
+        https://www.mediawiki.org/wiki/API:Showing_nearby_wiki_information
+     */
     $scope.wikiGeo = function() {
         var lat = $scope.latitude;
         var lon = $scope.longitude;
@@ -138,7 +170,6 @@ myApp.controller('geoCtrl', function($scope,$http) {
         
         $.ajax({
             type: "GET",
-//            url: "https://en.wikipedia.org/w/api.php?action=query&format=json&list=geosearch&gscoord=42.3482342%7C-71.1173125&gsradius=10000&gslimit=20&callback=?",
             url: url,
             contentType: "application/json; charset=utf-8",
             async: false,
@@ -152,14 +183,6 @@ myApp.controller('geoCtrl', function($scope,$http) {
             error: function (errorMessage) {
             }
         });
-
-
-
-    };
-
-    $scope.refresh = function() {
-        var welcome = document.getElementById("welcome");
-        welcome.innerHTML = "Here are your results!";
     };
 
 });
