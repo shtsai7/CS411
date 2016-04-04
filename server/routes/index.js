@@ -5,15 +5,18 @@ var app = express();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.sendFile('index.html', { name: 'CS411A2', status: 'ok' });
+  res.render('index', { title: 'Around Me', status: 'ok' });
 });
 
+router.get('/result', function(req, res, next) {
+    res.render('result', { title: 'Result', status: 'ok' });
+});
 
 /* GET result page. */
-router.get('/:name', function(req, res, next) {
-    console.log(req.params.name);
-    res.json(req.params.name);
-});
+//router.get('/:name', function(req, res, next) {
+//    console.log(req.params.name);
+//    res.json(req.params.name);
+//});
 
 
 module.exports = router;

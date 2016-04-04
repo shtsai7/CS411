@@ -140,6 +140,7 @@ myApp.controller('geoCtrl', function($scope,$http) {
                 // remove cite error
                 blurb.find('.mw-ext-cite-error').remove();
 
+                console.log($(blurb).find('p'));
                 $('#wikiResult').html($(blurb).find('p'));
 
             },
