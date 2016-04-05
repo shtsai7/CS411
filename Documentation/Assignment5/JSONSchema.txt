@@ -1,7 +1,7 @@
 JSON Schemas
 
 var Marker = new Schema({
-    markerID: String, *used for key
+    markerID: String, //used for key
     username: String,
     title: String,
     description: String,
@@ -13,7 +13,7 @@ var Marker = new Schema({
 });
 
 var User = new Schema({
-    username: String, *used for key
+    username: String, //used for key
     password: String
     
 });
@@ -21,7 +21,7 @@ var User = new Schema({
 var WikiInfo = new Schema({
     parse: {
         title: String,
-        pageid: String, *used for key
+        pageid: String, //used for key
         text:{
             "*": String
         }
