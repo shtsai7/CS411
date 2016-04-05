@@ -1,7 +1,6 @@
 /*jslint node:true */
 var express = require('express');
 var router = express.Router();
-var app = express();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -9,7 +8,13 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/result', function(req, res, next) {
-    res.render('result', { title: 'Result', status: 'ok' });
+    console.log("receive get");
+    res.render('result', { title: 'Result', content: 'ok' });
+});
+
+router.post('/result', function(req, res, next) {
+    console.log("receive post");
+    res.render('result', {content: req.body.data});
 });
 
 /* GET result page. */

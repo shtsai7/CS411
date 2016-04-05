@@ -6,11 +6,13 @@ mongoose.createConnection('mongodb://localhost/CS411/server');
 
 var Schema = mongoose.Schema;
 var WikiInfo = new Schema({
-
-    title: String,
-    pageid: String
-
-
+    parse: {
+        title: String,
+        pageid: String,
+        text:{
+            "*": String
+        }
+    }
 });
 
 var wiki = mongoose.model('wiki', WikiInfo);
@@ -26,21 +28,43 @@ router.post('/db', function (req, res, next) {
         if (err) {
             console.log('error!');
         } else {
-            res.json({message: 'marker saved'});
+            res.json({message: 'wikiInfo saved'});
         }
     });
 });
 
 router.get('/db', function(req, res, next) {
-    wikiInfo.find({}, function (err, results) {
-        res.json(results);
+    wiki.find({}, function (err, results) {
+        if (err) {
+            console.log("error when find db")
+        } else {
+            console.log("find all db")
+            res.json(results);
+        }
     });
 });
 
-/*router.get('/db/:username', function(req, res, next) {
- markers.find({username: req.params.name}, function(err, results){
- res.json(results);
+router.get('/db/:pageid', function(req, res, next) {
+    wiki.findOne({'parse.pageid': req.params.pageid}, function(err, results){
+        if (err) {
+            console.log("error when find db, pageid=%s",req.params.pageid)
+        } else {
+            console.log("find pageid=%s",req.params.pageid)
+            console.log(results)
+            res.json(results);
+        }
+    });
  });
- });*/
+
+router.delete('/db/:pageid', function(req, res, next) {
+    wiki.find({'parse.pageid': req.params.pageid}).remove(function(err){
+        if (err) {
+            console.log("error when detele db, pageid=%s",req.params.pageid)
+        } else {
+            console.log("delete pageid=%s",req.params.pageid)
+            res.json({message: 'wiki info deleted'})
+        }
+    });
+});
 
 module.exports = router;

@@ -110,44 +110,77 @@ myApp.controller('geoCtrl', function($scope,$http) {
      */
     $scope.wikiInfo = function() {
 
-
+        if ($scope.pageID == null) {
+            $('#wikiResult').html("Invalid page ID!");
+            return
+        }
 
         var pageID = $scope.pageID;
-        var url = "http://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&pageid=" +
-                pageID + "&callback=?";
 
+        var getUrl = "/wiki/db/" + pageID;
+        $http.get(getUrl)
+            .then(function sucessCallback(response) {
 
-        $.ajax({
-            type: "GET",
-            url: url,
-            contentType: "application/json; charset=utf-8",
-            async: false,
-            dataType: "json",
-            success: function (data, textStatus, jqXHR) {
-                console.log(data);
-                $scope.welcome = data;
+                if (response.data != null) {
+                    // we find the info from database
+                    console.log("get pageid=%s from database successfully",pageID);
 
+                    var markup = response.data.parse.text["*"];
 
-                var markup = data.parse.text["*"];
-                var blurb = $('<div></div>').html(markup);
+                    // clean up text
+                    var blurb = $('<div></div>').html(markup);
+                    blurb.find('a').each(function() { $(this).replaceWith($(this).html()); });
+                    blurb.find('sup').remove();
+                    blurb.find('.mw-ext-cite-error').remove();
+                    $('#wikiResult').html($(blurb).find('p'));
 
-                // remove links as they will not work
-                blurb.find('a').each(function() { $(this).replaceWith($(this).html()); });
+                } else {
 
-                // remove any references
-                blurb.find('sup').remove();
+                    // fail to find the info from database
+                    // need to call wiki API to get info
+                    console.log("get pageid=%s from database fail",pageID);
 
-                // remove cite error
-                blurb.find('.mw-ext-cite-error').remove();
+                    var url = "http://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&pageid=" +
+                        pageID + "&callback=?";
 
-                console.log($(blurb).find('p'));
-                $('#wikiResult').html($(blurb).find('p'));
+                    $.ajax({
+                        type: "GET",
+                        url: url,
+                        contentType: "application/json; charset=utf-8",
+                        async: false,
+                        dataType: "json",
+                        success: function (data, textStatus, jqXHR) {
+                            console.log("get pageid=%s from API successfully",pageID);
 
-            },
-            error: function (errorMessage) {
-            }
-        });
+                            // save JSON file to database
+                            $http.post("/wiki/db", data)
+                                .then(function successCallback(response) {
+                                    // this callback will be called asynchronously
+                                    // when the response is available
+                                    console.log("save pageid=%s to database successfully", pageID)
+                                }, function errorCallback(response) {
+                                    // called asynchronously if an error occurs
+                                    // or server returns response with an error status.
+                                    console.log("save pageid=%s to database fail", pageID)
+                                });
 
+                            var markup = data.parse.text["*"];
+
+                            // clean up text
+                            var blurb = $('<div></div>').html(markup);
+                            blurb.find('a').each(function() { $(this).replaceWith($(this).html()); });
+                            blurb.find('sup').remove();
+                            blurb.find('.mw-ext-cite-error').remove();
+                            $('#wikiResult').html($(blurb).find('p'));
+                        },
+                        error: function (errorMessage) {
+                            console.log("get pageid=%s from API fail",pageID);
+                        }
+                    });
+                }
+            }, function errorCallback(response) {
+                console.log("get pageid=%s from database fail",pageID);
+            });
     };
 
     /*
@@ -176,9 +209,9 @@ myApp.controller('geoCtrl', function($scope,$http) {
             async: false,
             dataType: "json",
             success: function (data, textStatus, jqXHR) {
-                console.log(data);
+                //console.log(data);
                 $scope.queries = data.query.geosearch;
-                console.log($scope.queries);
+                //console.log($scope.queries);
 
             },
             error: function (errorMessage) {
@@ -186,4 +219,20 @@ myApp.controller('geoCtrl', function($scope,$http) {
         });
     };
 
+
+    $scope.viewResult = function() {
+        $http({
+            method: 'GET',
+            url: '/result'
+        }).then(function successCallback(response) {
+            // this callback will be called asynchronously
+            // when the response is available
+            console.log("get successful")
+            window.location.href = '/result'
+        }, function errorCallback(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+            console.log("get fail")
+        });
+    }
 });
