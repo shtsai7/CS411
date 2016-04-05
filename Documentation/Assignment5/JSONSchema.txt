@@ -1,0 +1,30 @@
+JSON Schemas
+
+var Marker = new Schema({
+    markerID: String, *used for key
+    username: String,
+    title: String,
+    description: String,
+    type: String,
+    votes: Number,
+    latitude: Number,
+    longitude: Number
+    
+});
+
+var User = new Schema({
+    username: String, *used for key
+    password: String
+    
+});
+
+var WikiInfo = new Schema({
+    parse: {
+        title: String,
+        pageid: String, *used for key
+        text:{
+            "*": String
+        }
+    }
+});
+
