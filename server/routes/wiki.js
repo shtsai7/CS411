@@ -56,12 +56,24 @@ router.get('/db/:pageid', function(req, res, next) {
     });
  });
 
+// delete all in the wiki/db
+router.delete('/db/all', function(req, res, next) {
+    wiki.find({}).remove(function(err) {
+        if (err) {
+            console.log("error when detele all db");
+        } else {
+            console.log("delete all db");
+            res.json({message: 'all wiki info deleted'});
+        }
+    })
+});
+
 router.delete('/db/:pageid', function(req, res, next) {
     wiki.find({'parse.pageid': req.params.pageid}).remove(function(err){
         if (err) {
             console.log("error when detele db, pageid=%s",req.params.pageid)
         } else {
-            console.log("delete pageid=%s",req.params.pageid)
+            console.log("delete pageid=%s",req.params.pageid);
             res.json({message: 'wiki info deleted'})
         }
     });

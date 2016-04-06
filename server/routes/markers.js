@@ -6,7 +6,6 @@ mongoose.createConnection('mongodb://localhost/CS411/server');
 
 var Schema = mongoose.Schema;
 var Marker = new Schema({
-    markerID: String,
     username: String,
     title: String,
     description: String,

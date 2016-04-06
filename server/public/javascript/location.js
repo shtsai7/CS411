@@ -7,7 +7,7 @@ $scope.foo = 'foo';
 
 myApp.controller('geoCtrl', function($scope,$http) {
 
-    console.log("inside geolocate controller");
+    //console.log("inside geolocate controller");
 
     /*
         Initialize map when open page
@@ -16,7 +16,7 @@ myApp.controller('geoCtrl', function($scope,$http) {
         https://developers.google.com/maps/documentation/javascript/tutorial#Loading_the_Maps_API
      */
     $scope.initMap = function() {
-        console.log("inside initMap");
+        //console.log("inside initMap");
 
         $scope.latitude = 39.5;
         $scope.longitude = -98.35;
@@ -32,7 +32,7 @@ myApp.controller('geoCtrl', function($scope,$http) {
 
     // refresh map to center at the input coordinate
     $scope.refreshMap = function() {
-        console.log("inside initMap");
+        //console.log("inside refreshMap");
 
         var latitude = parseFloat($scope.latitude);
         var longitude = parseFloat($scope.longitude);
@@ -41,10 +41,11 @@ myApp.controller('geoCtrl', function($scope,$http) {
             var map;
             var options = {
                 center: {lat: latitude, lng: longitude},
-                zoom: 10
+                zoom: 12
             };
             map = new google.maps.Map(document.getElementById('map'), options);
             document.getElementById("out").innerHTML = "";
+            return map;
         } else {
             document.getElementById("out").innerHTML = "<p>The input is invalid.</p>";
         }
@@ -108,14 +109,15 @@ myApp.controller('geoCtrl', function($scope,$http) {
      used code for cleaning up text from this page
      http://www.9bitstudios.com/2014/03/getting-data-from-the-wikipedia-api-using-jquery/
      */
-    $scope.wikiInfo = function() {
+    $scope.wikiInfo = function(pageID) {
 
-        if ($scope.pageID == null) {
+        console.log(pageID);
+        if (pageID == null) {
             $('#wikiResult').html("Invalid page ID!");
             return
         }
 
-        var pageID = $scope.pageID;
+        //var pageID = $scope.pageID;
 
         var getUrl = "/wiki/db/" + pageID;
         $http.get(getUrl)
@@ -164,6 +166,7 @@ myApp.controller('geoCtrl', function($scope,$http) {
                                     console.log("save pageid=%s to database fail", pageID)
                                 });
 
+                            //console.log(data);
                             var markup = data.parse.text["*"];
 
                             // clean up text
@@ -213,6 +216,7 @@ myApp.controller('geoCtrl', function($scope,$http) {
                 $scope.queries = data.query.geosearch;
                 //console.log($scope.queries);
 
+                $scope.putMarker($scope.queries);
             },
             error: function (errorMessage) {
             }
@@ -234,5 +238,54 @@ myApp.controller('geoCtrl', function($scope,$http) {
             // or server returns response with an error status.
             console.log("get fail")
         });
-    }
+    };
+
+
+    /* put markers on the map
+       input queries is a list of result obtain from wikigeo function
+
+       Google Map Marker documentation
+       https://developers.google.com/maps/documentation/javascript/markers#add
+    */
+    $scope.putMarker = function(queries) {
+
+        //console.log("inside putMarker");
+
+        var map = $scope.refreshMap();
+        var markers = [];
+
+        for (index in queries) {
+
+            var car = {type:"Fiat", model:"500", color:"white"};
+            var marker = {
+                lat: queries[index].lat,
+                lng: queries[index].lon,
+                title: queries[index].title,
+                pageid: queries[index].pageid
+            }
+
+            markers[index] = marker
+            var coordinate = {lat: queries[index].lat, lng: queries[index].lng};
+
+            markers[index]["map"] = new google.maps.Marker({
+                position: {lat: markers[index].lat, lng: markers[index].lng},
+                map: map,
+                animation: google.maps.Animation.DROP,
+                title: markers[index].title
+            });
+        }
+
+        // onclick, show wiki Info
+        function addClick(index) {
+            markers[index]["map"].addListener('click', function() {
+                var pageid = markers[index].pageid;
+                $scope.wikiInfo(pageid);
+            });
+        }
+
+        for (index in markers) {
+            addClick(index);
+        }
+    };
+
 });
