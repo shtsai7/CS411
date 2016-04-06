@@ -4,10 +4,9 @@
     <list default="true" id="78716371-d632-48b7-ae06-57aa9ca4f646" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/public/javascript/location.js" afterPath="$PROJECT_DIR$/server/public/javascript/location.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/routes/index.js" afterPath="$PROJECT_DIR$/server/routes/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/routes/markers.js" afterPath="$PROJECT_DIR$/server/routes/markers.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/routes/wiki.js" afterPath="$PROJECT_DIR$/server/routes/wiki.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/views/index.jade" afterPath="$PROJECT_DIR$/server/views/index.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/views/result.jade" afterPath="$PROJECT_DIR$/server/views/result.jade" />
     </list>
     <ignored path="CS411.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,7 +30,7 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
+            <state relative-caret-position="270">
               <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
@@ -43,7 +42,7 @@
       <file leaf-file-name="wiki.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/routes/wiki.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
+            <state relative-caret-position="870">
               <caret line="58" column="21" selection-start-line="58" selection-start-column="21" selection-end-line="58" selection-end-column="21" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
@@ -55,7 +54,7 @@
       <file leaf-file-name="markers.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/routes/markers.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-261">
+            <state relative-caret-position="60">
               <caret line="4" column="25" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="25" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
@@ -67,8 +66,8 @@
       <file leaf-file-name="location.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server/public/javascript/location.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="126" column="0" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
+            <state relative-caret-position="319">
+              <caret line="129" column="31" selection-start-line="129" selection-start-column="31" selection-end-line="129" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -107,7 +106,7 @@
       <file leaf-file-name="users.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/routes/users.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-171">
+            <state relative-caret-position="60">
               <caret line="4" column="16" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="16" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
@@ -119,7 +118,7 @@
       <file leaf-file-name="index.jade" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/views/index.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
+            <state relative-caret-position="630">
               <caret line="42" column="37" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="37" />
               <folding />
             </state>
@@ -129,7 +128,7 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
+            <state relative-caret-position="285">
               <caret line="19" column="12" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
@@ -209,6 +208,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -342,7 +342,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -447,14 +446,15 @@
       <workItem from="1459688837685" duration="7760000" />
       <workItem from="1459783155014" duration="1709000" />
       <workItem from="1459789124665" duration="10305000" />
+      <workItem from="1459910555475" duration="86000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49232000" />
+    <option name="totallyTimeSpent" value="49318000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="773" extended-state="0" />
+    <frame x="0" y="23" width="1280" height="773" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1765625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -497,7 +497,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -521,7 +520,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="21" column="1" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -593,7 +591,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="21" column="1" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -650,7 +647,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -790,7 +786,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="21" column="1" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -800,7 +795,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -822,7 +816,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server/views/index.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
+        <state relative-caret-position="630">
           <caret line="42" column="37" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="37" />
           <folding />
         </state>
@@ -830,7 +824,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
+        <state relative-caret-position="270">
           <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
@@ -848,7 +842,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server/routes/users.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-171">
+        <state relative-caret-position="60">
           <caret line="4" column="16" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="16" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
@@ -858,7 +852,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server/routes/markers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-261">
+        <state relative-caret-position="60">
           <caret line="4" column="25" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="25" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
@@ -868,7 +862,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server/routes/wiki.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
+        <state relative-caret-position="870">
           <caret line="58" column="21" selection-start-line="58" selection-start-column="21" selection-end-line="58" selection-end-column="21" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
@@ -878,7 +872,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
+        <state relative-caret-position="285">
           <caret line="19" column="12" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
@@ -888,8 +882,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server/public/javascript/location.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="126" column="0" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
+        <state relative-caret-position="319">
+          <caret line="129" column="31" selection-start-line="129" selection-start-column="31" selection-end-line="129" selection-end-column="31" />
           <folding />
         </state>
       </provider>
