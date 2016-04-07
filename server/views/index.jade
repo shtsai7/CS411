@@ -17,38 +17,31 @@ html.
   <body ng-app="myApp">
       <h1>#{title}</h1>
 
-      <a href="index.html">Home</a>
-      <a href="result.html">Result</a> <br>
-
-
-      <div ng-controller="geoCtrl" ng-init="initMap()">
+      <div ng-controller="geoCtrl" ng-init="geoFindMe()">
           <p>
               Latitude: <input ng-model="latitude"/> <br>
               Longitude: <input ng-model="longitude"/> <br>
               <button ng-click="refreshMap()">Use this location</button>
               <button ng-click="geoFindMe()">Show my location</button>
+              <button ng-click="wikiGeo()">wikiGeo</button> <br>
 
               <div id="out"></div>
               <div id="map"></div>
           </p>
 
           <p>
-              Page ID: <input ng-model="pageID">
-              <button ng-click="wikiInfo(pageID)">wikiInfo</button>
+              <img id="wikiImage" src="">
               <div id="wikiResult"></div>
           </p>
 
           <p>
-              <button ng-click="viewResult()">view Result</button>
-              <a href="/result">view Result</a>
-          </p>
+              Page ID: <input ng-model="pageID">
+              <button ng-click="wikiInfo(pageID)">wikiInfo</button> <br>
 
-          <p>
-              <button ng-click="wikiGeo()">wikiGeo</button> <br>
               <div id="wikiGeoResult">
                   <div id="welcome">Welcome</div>
                   <table>
-                      <th> title </th>
+                      <th>Title</th>
                       <th>Page ID</th>
                       <th>Latitude</th>
                       <th>Longitude</th>

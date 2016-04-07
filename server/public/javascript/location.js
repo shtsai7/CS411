@@ -41,7 +41,7 @@ myApp.controller('geoCtrl', function($scope,$http) {
             var map;
             var options = {
                 center: {lat: latitude, lng: longitude},
-                zoom: 12
+                zoom: 15
             };
             map = new google.maps.Map(document.getElementById('map'), options);
             document.getElementById("out").innerHTML = "";
@@ -76,7 +76,12 @@ myApp.controller('geoCtrl', function($scope,$http) {
     
             output.innerHTML = '';
 
-            $scope.refreshMap();
+            var map = $scope.refreshMap();
+            var marker = new google.maps.Marker({
+                position: {lat: latitude, lng: longitude},
+                map: map,
+                title: 'Your location'
+            });
 
         }
     
@@ -119,13 +124,18 @@ myApp.controller('geoCtrl', function($scope,$http) {
 
         //var pageID = $scope.pageID;
 
+        var content;
         var getUrl = "/wiki/db/" + pageID;
         $http.get(getUrl)
             .then(function sucessCallback(response) {
 
                 if (response.data != null) {
                     // we find the info from database
+                    var title = response.data.parse.title;
+                    $scope.wikiGetImage(title,pageID,"wikiImage");
+
                     console.log("get pageid=%s from database successfully",pageID);
+                    //console.log(response.data);
 
                     var markup = response.data.parse.text["*"];
 
@@ -135,6 +145,7 @@ myApp.controller('geoCtrl', function($scope,$http) {
                     blurb.find('sup').remove();
                     blurb.find('.mw-ext-cite-error').remove();
                     $('#wikiResult').html($(blurb).find('p'));
+
 
                 } else {
 
@@ -153,6 +164,9 @@ myApp.controller('geoCtrl', function($scope,$http) {
                         dataType: "json",
                         success: function (data, textStatus, jqXHR) {
                             console.log("get pageid=%s from API successfully",pageID);
+
+                            var title = data.parse.title;
+                            $scope.wikiGetImage(title,pageID,"wikiImage");
 
                             // save JSON file to database
                             $http.post("/wiki/db", data)
@@ -175,6 +189,7 @@ myApp.controller('geoCtrl', function($scope,$http) {
                             blurb.find('sup').remove();
                             blurb.find('.mw-ext-cite-error').remove();
                             $('#wikiResult').html($(blurb).find('p'));
+
                         },
                         error: function (errorMessage) {
                             console.log("get pageid=%s from API fail",pageID);
@@ -184,6 +199,7 @@ myApp.controller('geoCtrl', function($scope,$http) {
             }, function errorCallback(response) {
                 console.log("get pageid=%s from database fail",pageID);
             });
+
     };
 
     /*
@@ -203,7 +219,7 @@ myApp.controller('geoCtrl', function($scope,$http) {
             latS +
             "|" +
             lonS +
-            "&gsradius=10000&gslimit=20&callback=?";
+            "&gsradius=10000&gslimit=30&callback=?";
         
         $.ajax({
             type: "GET",
@@ -223,6 +239,42 @@ myApp.controller('geoCtrl', function($scope,$http) {
         });
     };
 
+    $scope.wikiGetImage = function(title, pageid, imageid) {
+        //var title = "Waconda Lake";
+        //var pageid = "24779535"
+
+        var url =
+            "https://en.wikipedia.org/w/api.php?action=query&titles=" +
+            title +
+            "&prop=pageimages&format=json&pithumbsize=500&callback=?";
+
+        $.ajax({
+            type: "GET",
+            url: url,
+            contentType: "application/json; charset=utf-8",
+            async: false,
+            dataType: "json",
+            success: function (data, textStatus, jqXHR) {
+                //console.log("get image title=%s from API successfully",title);
+
+                var temp = data.query.pages[pageid];
+                
+                if ("thumbnail" in temp) {
+                    //console.log("img src is %s", temp.thumbnail.source);
+                    document.getElementById(imageid).src=temp.thumbnail.source;
+                } else {
+                    //console.log("no image available");
+                    document.getElementById(imageid).src="";
+                }
+
+            },
+            error: function (errorMessage) {
+                //console.log("get image title=%s from API fail",title);
+            }
+        });
+
+
+    };
 
     $scope.viewResult = function() {
         $http({
@@ -241,7 +293,8 @@ myApp.controller('geoCtrl', function($scope,$http) {
     };
 
 
-    /* put markers on the map
+    /*
+       put markers on the map
        input queries is a list of result obtain from wikigeo function
 
        Google Map Marker documentation
@@ -256,7 +309,6 @@ myApp.controller('geoCtrl', function($scope,$http) {
 
         for (index in queries) {
 
-            var car = {type:"Fiat", model:"500", color:"white"};
             var marker = {
                 lat: queries[index].lat,
                 lng: queries[index].lon,
