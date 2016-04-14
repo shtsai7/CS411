@@ -48,7 +48,12 @@ myApp.controller('geoCtrl', function($scope,$http) {
             var clickMarker = new google.maps.Marker({
                 position: {lat: latitude, lng: longitude},
                 map: map,
-                title: 'selected location'
+                title: 'selected location',
+                // change click marker icon here
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    scale: 5
+                }
             });
 
             var infowindow = new google.maps.InfoWindow({
@@ -324,6 +329,10 @@ myApp.controller('geoCtrl', function($scope,$http) {
 
         var map = $scope.refreshMap();
         var markers = [];
+        var infowindow = new google.maps.InfoWindow({
+        });
+        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        var labelIndex = 0;
 
         for (index in queries) {
 
@@ -340,22 +349,39 @@ myApp.controller('geoCtrl', function($scope,$http) {
             markers[index]["map"] = new google.maps.Marker({
                 position: {lat: markers[index].lat, lng: markers[index].lng},
                 map: map,
-                animation: google.maps.Animation.DROP,
-                title: markers[index].title
+                //animation: google.maps.Animation.DROP,
+                title: markers[index].title,
+                label: labels[labelIndex++ % labels.length]
             });
         }
 
         // onclick, show wiki Info
         function addClick(index) {
-            markers[index]["map"].addListener('click', function() {
+            markers[index]["map"].addListener('click', function(e) {
                 var pageid = markers[index].pageid;
                 $scope.wikiInfo(pageid);
+
+                var position = e.latLng;
+                var title = markers[index].title;
+
+                // Need to work on this
+                //var content = '<div ng-app="myApp" ng-controller="geoCtrl" >' +
+                //    "<h5>" +title + "</h5>" +
+                //    '<button ng-click="showResult()">View</button>' + "</div>"
+
+                infowindow.setContent(title);
+                infowindow.setPosition(position);
+                infowindow.open(map);
             });
         }
 
         for (index in markers) {
             addClick(index);
         }
+    };
+
+    $scope.showResult = function() {
+        console.log("hello");
     };
 
 });
