@@ -44,6 +44,29 @@ myApp.controller('geoCtrl', function($scope,$http) {
                 zoom: 15
             };
             map = new google.maps.Map(document.getElementById('map'), options);
+
+            var clickMarker = new google.maps.Marker({
+                position: {lat: latitude, lng: longitude},
+                map: map,
+                title: 'selected location'
+            });
+
+            var infowindow = new google.maps.InfoWindow({
+            });
+
+            map.addListener('click', function(e) {
+                clickMarker.setPosition(e.latLng);
+                infowindow.close();
+                $scope.latitude = e.latLng.lat();
+                $scope.longitude = e.latLng.lng();
+            });
+
+            clickMarker.addListener('click', function(e) {
+                infowindow.setContent(e.latLng.lat()+" "+e.latLng.lng());
+                infowindow.setPosition(e.latLng);
+                infowindow.open(map);
+            });
+
             document.getElementById("out").innerHTML = "";
             return map;
         } else {
@@ -77,11 +100,6 @@ myApp.controller('geoCtrl', function($scope,$http) {
             output.innerHTML = '';
 
             var map = $scope.refreshMap();
-            var marker = new google.maps.Marker({
-                position: {lat: latitude, lng: longitude},
-                map: map,
-                title: 'Your location'
-            });
 
         }
     
