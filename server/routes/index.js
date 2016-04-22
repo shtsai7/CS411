@@ -8,7 +8,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/result', function(req, res, next) {
-    console.log("receive get");
     res.render('result', { title: 'Result', content: 'ok' });
 });
 
@@ -26,6 +25,15 @@ router.get('/result/:pageid', function(req, res, next) {
         {   title: pageid, 
             content: "ok"
         })
+});
+
+router.get('/addmarker/:lat/:lng', function(req, res, next) {
+    res.render('marker',
+        {   title: 'Add Marker', 
+            status: 'ok',
+            lat: req.params.lat,
+            lng: req.params.lng
+        });
 });
 
 
