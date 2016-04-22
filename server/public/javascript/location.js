@@ -383,8 +383,13 @@ myApp.controller('geoCtrl', function($scope,$http) {
         }
     };
 
-    $scope.showResult = function() {
-        console.log("hello");
+    $scope.addMarkerPage = function() {
+        var url = '/addmarker/' +
+                $scope.latitude +
+                '/' +
+                $scope.longitude;
+
+        window.open(url);
     };
 
 });
