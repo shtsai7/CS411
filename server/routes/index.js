@@ -12,16 +12,23 @@ router.get('/result', function(req, res, next) {
     res.render('result', { title: 'Result', content: 'ok' });
 });
 
-router.post('/result', function(req, res, next) {
-    console.log("receive post");
-    res.render('result', {content: req.body.data});
-});
+//router.post('/result', function(req, res, next) {
+//    console.log("receive post");
+//    res.render('result', {content: req.body.data});
+//});
 
 /* GET result page. */
-//router.get('/:name', function(req, res, next) {
-//    console.log(req.params.name);
-//    res.json(req.params.name);
-//});
+router.get('/result/:pageid', function(req, res, next) {
+    console.log(req.params.pageid);
+    //res.json(req.params.name);
+    var pageid = req.params.pageid;
+    res.render('result', 
+        {   title: pageid, 
+            content: "ok"
+        })
+});
+
+
 
 
 module.exports = router;
