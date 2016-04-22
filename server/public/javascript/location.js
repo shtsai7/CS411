@@ -154,6 +154,10 @@ myApp.controller('geoCtrl', function($scope,$http) {
 
                 if (response.data != null) {
                     // we find the info from database
+
+                    console.log("get pageid=%s from database successfully",pageID);
+
+                    /* No need to print text
                     var title = response.data.parse.title;
                     $scope.wikiGetImage(title,pageID,"wikiImage");
 
@@ -168,7 +172,7 @@ myApp.controller('geoCtrl', function($scope,$http) {
                     blurb.find('sup').remove();
                     blurb.find('.mw-ext-cite-error').remove();
                     $('#wikiResult').html($(blurb).find('p'));
-
+                    */
 
                 } else {
 
@@ -188,8 +192,8 @@ myApp.controller('geoCtrl', function($scope,$http) {
                         success: function (data, textStatus, jqXHR) {
                             console.log("get pageid=%s from API successfully",pageID);
 
+
                             var title = data.parse.title;
-                            $scope.wikiGetImage(title,pageID,"wikiImage");
 
                             // save JSON file to database
                             $http.post("/wiki/db", data)
@@ -203,8 +207,10 @@ myApp.controller('geoCtrl', function($scope,$http) {
                                     console.log("save pageid=%s to database fail", pageID)
                                 });
 
-                            //console.log(data);
-                            var markup = data.parse.text["*"];
+                            /* No need to print text
+                            $scope.wikiGetImage(title,pageID,"wikiImage");
+
+                             var markup = data.parse.text["*"];
 
                             // clean up text
                             var blurb = $('<div></div>').html(markup);
@@ -212,7 +218,7 @@ myApp.controller('geoCtrl', function($scope,$http) {
                             blurb.find('sup').remove();
                             blurb.find('.mw-ext-cite-error').remove();
                             $('#wikiResult').html($(blurb).find('p'));
-
+                            */
                         },
                         error: function (errorMessage) {
                             console.log("get pageid=%s from API fail",pageID);
@@ -280,6 +286,7 @@ myApp.controller('geoCtrl', function($scope,$http) {
             success: function (data, textStatus, jqXHR) {
                 //console.log("get image title=%s from API successfully",title);
 
+                console.log(data)
                 var temp = data.query.pages[pageid];
                 
                 if ("thumbnail" in temp) {
@@ -295,8 +302,6 @@ myApp.controller('geoCtrl', function($scope,$http) {
                 //console.log("get image title=%s from API fail",title);
             }
         });
-
-
     };
 
     $scope.viewResult = function() {
@@ -365,11 +370,9 @@ myApp.controller('geoCtrl', function($scope,$http) {
                 var title = markers[index].title;
 
                 // Need to work on this
-                //var content = '<div ng-app="myApp" ng-controller="geoCtrl" >' +
-                //    "<h5>" +title + "</h5>" +
-                //    '<button ng-click="showResult()">View</button>' + "</div>"
+                var content = '<a href="/result/' + pageid + '" target="_blank">' + title + '</a>';
 
-                infowindow.setContent(title);
+                infowindow.setContent(content);
                 infowindow.setPosition(position);
                 infowindow.open(map);
             });
