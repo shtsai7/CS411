@@ -381,9 +381,7 @@ myApp.controller('geoCtrl', function($scope,$http, $cookies) {
                 var id = markers[index].id;
 
                 // Need to work on this
-                var content = '<a href="/result/wiki/' + pageid + '" target="_blank">' + title + '</a>' +
-                    '<p>' + pageid + '  ' + id + '</p>';
-
+                var content = '<a href="/result/wiki/' + pageid + '" target="_blank">' + title + '</a>';
                 infowindow.setContent(content);
                 infowindow.setPosition(position);
                 infowindow.open(map);
@@ -465,8 +463,7 @@ myApp.controller('geoCtrl', function($scope,$http, $cookies) {
                 // Need to work on this
                 //var content = '<a href="/result/' + pageid + '" target="_blank">' + title + '</a>';
                 var content = '<a href="/result/user/' + id + '" target="_blank">' + title + '</a>' +
-                              '<p>' + description + '</p>'+
-                              '<p>' + id + '</p>';
+                              '<p>' + description + '</p>';
 
                 infowindow.setContent(content);
                 infowindow.setPosition(position);
