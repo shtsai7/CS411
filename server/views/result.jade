@@ -27,12 +27,13 @@ html.
 
     <body ng-app="myApp">
         <h1 id="title">#{title}</h1>
-        <p>#{type}</p>
+        <p id="type">#{type}</p>
 
         <div ng-controller="resultCtrl" ng-init="initPage()">
             <p>
                <img id="wikiImage" src="">
                <div id="wikiResult"></div>
+               <div id="userResult"></div>
             </p>
         </div>
     </body>

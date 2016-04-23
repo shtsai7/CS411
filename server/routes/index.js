@@ -28,6 +28,18 @@ router.get('/result/wiki/:pageid', function(req, res, next) {
         })
 });
 
+router.get('/result/user/:id', function(req, res, next) {
+    console.log(req.params.id);
+    //res.json(req.params.name);
+    var id = req.params.id;
+    res.render('result',
+        {   title: id,
+            content: "ok",
+            type: "user"
+        })
+});
+
+
 router.get('/addmarker/:lat/:lng', function(req, res, next) {
     res.render('marker',
         {   title: 'Add Marker', 
