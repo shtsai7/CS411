@@ -40,6 +40,17 @@ router.get('/db', function(req, res, next) {
     });
 });
 
+router.delete('/db/all', function(req, res, next) {
+    markers.find({}).remove(function(err) {
+        if (err) {
+            console.log("error when detele all db");
+        } else {
+            console.log("delete all db");
+            res.json({message: 'all markers deleted'});
+        }
+    })
+});
+
 /*router.get('/db/:username', function(req, res, next) {
     markers.find({username: req.params.name}, function(err, results){
         res.json(results);

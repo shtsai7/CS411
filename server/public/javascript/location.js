@@ -383,6 +383,7 @@ myApp.controller('geoCtrl', function($scope,$http) {
         }
     };
 
+    // send user to addMarker page
     $scope.addMarkerPage = function() {
         var url = '/addmarker/' +
                 $scope.latitude +
@@ -392,4 +393,74 @@ myApp.controller('geoCtrl', function($scope,$http) {
         window.open(url);
     };
 
+    // display user generated markers on the map
+    $scope.showMarkers = function() {
+        var map = $scope.refreshMap();
+
+        $http({
+            method: 'GET',
+            url: '/markers/db/'
+        }).then(function successCallback(response) {
+            console.log(response.data);
+            $scope.putUserMarker(response.data);
+        }, function errorCallback(response) {
+            console.log("get markers from db fail");
+        });
+    };
+
+    $scope.putUserMarker = function(queries) {
+
+        //console.log("inside putMarker");
+
+        var map = $scope.refreshMap();
+        var markers = [];
+        var infowindow = new google.maps.InfoWindow({
+        });
+        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        var labelIndex = 0;
+
+        for (index in queries) {
+
+            var marker = {
+                lat: queries[index].latitude,
+                lng: queries[index].longitude,
+                title: queries[index].title,
+                description: queries[index].description
+            }
+
+            markers[index] = marker;
+            var coordinate = {lat: queries[index].latitude, lng: queries[index].longitude};
+
+            markers[index]["map"] = new google.maps.Marker({
+                position: {lat: markers[index].lat, lng: markers[index].lng},
+                map: map,
+                //animation: google.maps.Animation.DROP,
+                title: markers[index].title,
+                label: labels[labelIndex++ % labels.length]
+            });
+        }
+
+        // onclick, show wiki Info
+        function addClick(index) {
+            markers[index]["map"].addListener('click', function(e) {
+
+                var position = e.latLng;
+                var title = markers[index].title;
+                var description = markers[index].title;
+
+                // Need to work on this
+                //var content = '<a href="/result/' + pageid + '" target="_blank">' + title + '</a>';
+                var content = '<h4>' + title + '</h4>' +
+                              '<p>' + description + '</p>';
+
+                infowindow.setContent(content);
+                infowindow.setPosition(position);
+                infowindow.open(map);
+            });
+        }
+
+        for (index in markers) {
+            addClick(index);
+        }
+    };
 });
