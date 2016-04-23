@@ -29,7 +29,7 @@ myApp.controller('loginCtrl', function ($scope ,$http, $cookies) {
         $scope.username = htmlspecialchars($scope.username);
         
         //test if all fields were entered
-        if ($scope.username == null || $scope.password == null || $scope.password == "" || $scope.username == ""){
+        if ($scope.username == null || $scope.password == null || $scope.password == "" || $scope.username == "" ){
             output.innerHTML = "Please enter username and password";
         }
         console.log($scope.username);

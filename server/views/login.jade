@@ -24,9 +24,9 @@ html.
       <div ng-controller="loginCtrl" ng-init = "initLogin()">
           <p>
               Username: <input ng-model="username"/> <br>
-              Email: <input ng-model="email"/> <br>
+              <div id = "email">Email: <input ng-model="email"/></div> <br>
               Password: <input ng-model="password" type = "password" /> <br>
-              Retype Password: <input ng-model="retypePassword" type = "password" /> <br>
+              <div id = "retypePassword">Retype Password: <input ng-model="retypePassword" type = "password" /> </div><br>
               <button ng-click="login()">Login</button>
               <button ng-click="signUp()">Sign Up</button>
               <br>
