@@ -1,0 +1,40 @@
+doctype html
+html.
+  <head>
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+    
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.js"></script>
+    <script src="../javascript/login.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+    <meta charset="UTF-8">
+    <title>#{title}</title>
+
+  </head>
+
+  <body ng-app="myApp">
+      <h1>#{title}</h1>
+
+      <div ng-controller="loginCtrl" ng-init = "initLogin()">
+          <p>
+              Username: <input ng-model="username"/> <br>
+              Email: <input ng-model="email"/> <br>
+              Password: <input ng-model="password" type = "password" /> <br>
+              Retype Password: <input ng-model="retypePassword" type = "password" /> <br>
+              <button ng-click="login()">Login</button>
+              <button ng-click="signUp()">Sign Up</button>
+              <br>
+              <p id="out"></p>
+          </p>
+      </div>
+              
+
+
+  </body>
+
+
+
