@@ -9,16 +9,23 @@ html.
       <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
               <div class="container-fluid">
                   <ul class="nav navbar-nav">
-                      <li id="home"><a href="/" onclick="selectTab("home")">Home</a></li>
-                      <li id="about"><a href="/result">Result</a></li>
-                  </ul>
-              </div>
-      </nav>
+                <li id="home"><a href="/" onclick="selectTab("home")">Home</a></li>
+                <li id="about"><a href="/result">Result</a></li>
+                <li class="dropdown"><a id="user"class="dropdown-toggle" data-toggle="dropdown" href="#">{{username}}<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/login">Log Out</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.js"></script>
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPWzKLkH_TcLKa1yDs6oIZeQQdZ7Y8v0A"></script>
-      <script src="/javascript/addmarker.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.js"></script>
+    <script src="https://code.angularjs.org/1.5.2/angular-cookies.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPWzKLkH_TcLKa1yDs6oIZeQQdZ7Y8v0A"></script>
+    <script src="../javascript/addmarker.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
       <meta charset="UTF-8">
       <title>#{title}</title>
