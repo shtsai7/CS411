@@ -18,6 +18,7 @@ myApp.controller('resultCtrl', function($scope,$http) {
             $scope.pageid = pageid;
 
             $scope.wikiInfo(pageid);
+            $scope.wikiMarker(pageid);
         }
 
         if (type == "user") {
@@ -56,6 +57,7 @@ myApp.controller('resultCtrl', function($scope,$http) {
 
                 // we find the info from database
                 var title = response.data.parse.title;
+                $scope.title = title;
 
                 // update title
                 document.getElementById("title").innerHTML = title;
@@ -116,13 +118,63 @@ myApp.controller('resultCtrl', function($scope,$http) {
         });
     };
 
+    $scope.wikiMarker = function(pageid) {
+        var url = '/markers/db/pageid/'+pageid;
+        $http({
+            method:'GET',
+            url: url
+        }).then(function successCallback(response) {
+            if (response.data.length == 0) {
+                $scope.createNullMarker();
+                console.log("didnt find in db")
+            } else {
+                var data = response.data[0];
+                document.getElementById("userResult").innerHTML = '<p>' + data.description + '</p>' +
+                    '<p>' + data.votes + '</p>'
+
+
+            }
+        }, function errorCallback(response) {
+            console.log("get fail")
+        });
+
+    };
+
+    $scope.createNullMarker = function() {
+        var req = {
+            method: 'POST',
+            url: '/markers/db',
+            data:{
+                username: "wiki",
+                title: $scope.title,
+                description: "",
+                type: "wiki",
+                votes: 0,
+                latitude: 0,
+                longitude: 0,
+                pageid: $scope.pageid
+            }
+        };
+
+        $http(req)
+            .then(function successCallback(response) {
+                //console.log(response.data);
+                //console.log(response);
+                console.log("save marker %s to database successfully", title);
+                document.getElementById("userResult").innerHTML = '<p>' + "" + '</p>' +
+                    '<p>' + 0 + '</p>'
+
+            }, function errorCallback(response) {
+                console.log("save marker %s to database fail", title)
+            });
+    }
 
     $scope.userInfo = function(id) {
 
-        var url = '/markers/db/' + id;
+        var url = '/markers/db/id/' + id;
         $http({
             method: 'GET',
-            url: url,
+            url: url
         }).then(function successCallback(response) {
             // this callback will be called asynchronously
             // when the response is available
@@ -139,8 +191,6 @@ myApp.controller('resultCtrl', function($scope,$http) {
             // or server returns response with an error status.
             console.log("get fail")
         });
-
-
     };
 
 });

@@ -36,8 +36,8 @@ myApp.controller('markerCtrl', function($scope,$http) {
 
         $http(req)
             .then(function successCallback(response) {
-                console.log(response.data);
-                console.log(response);
+                //console.log(response.data);
+                //console.log(response);
                 console.log("save marker %s to database successfully", title);
                 alert("marker saved");
             }, function errorCallback(response) {
