@@ -1,10 +1,12 @@
-var myApp = angular.module('myApp', []);
+var myApp = angular.module('myApp', ['ngCookies']);
 
 myApp.controller('ctrl', function($scope) {
     $scope.foo = 'foo';
 });
 
-myApp.controller('markerCtrl', function($scope,$http) {
+myApp.controller('markerCtrl', function($scope,$http, $cookies) {
+    var username = $cookies.get("username");
+    document.getElementById("user").innerHTML = username + "<span class=\"caret\"></span>"
     $scope.save = function() {
 
         // NEED TO DO INPUT VALIDATION
