@@ -61,6 +61,7 @@ myApp.controller('resultCtrl', function($scope,$http) {
 
                 // update title
                 document.getElementById("title").innerHTML = title;
+                document.getElementById("title2").innerHTML = title;
 
                 $scope.wikiGetImage(title,pageID,"wikiImage");
 
@@ -74,7 +75,8 @@ myApp.controller('resultCtrl', function($scope,$http) {
                 blurb.find('a').each(function() { $(this).replaceWith($(this).html()); });
                 blurb.find('sup').remove();
                 blurb.find('.mw-ext-cite-error').remove();
-                $('#wikiResult').html($(blurb).find('p'));
+                $('#description').html($(blurb).find('p'));
+                //document.getElementById("description").innerHTML = ($(blurb).find('p'));
 
             }, function errorCallback(response) {
                 console.log("get pageid=%s from database fail",pageID);
@@ -129,8 +131,9 @@ myApp.controller('resultCtrl', function($scope,$http) {
                 console.log("didnt find in db")
             } else {
                 var data = response.data[0];
-                document.getElementById("userResult").innerHTML = '<p>' + data.description + '</p>' +
-                    '<p>' + data.votes + '</p>'
+                document.getElementById("votes").innerHTML = data.votes;
+                //document.getElementById("userResult").innerHTML = '<p>' + data.description + '</p>' +
+
 
 
             }
@@ -161,8 +164,7 @@ myApp.controller('resultCtrl', function($scope,$http) {
                 //console.log(response.data);
                 //console.log(response);
                 console.log("save marker %s to database successfully", title);
-                document.getElementById("userResult").innerHTML = '<p>' + "" + '</p>' +
-                    '<p>' + 0 + '</p>'
+                document.getElementById("votes").innerHTML = 0;
 
             }, function errorCallback(response) {
                 console.log("save marker %s to database fail", title)
@@ -183,7 +185,10 @@ myApp.controller('resultCtrl', function($scope,$http) {
 
             var data = response.data[0];
             document.getElementById("title").innerHTML = data.title;
-            document.getElementById("userResult").innerHTML = '<p>' + data.description + '</p>' +
+            document.getElementById("title2").innerHTML = data.title;
+            document.getElementById("votes").innerHTML = data.votes;
+            document.getElementById("description").innerHTML = data.description;
+            //document.getElementById("userResult").innerHTML = '<p>' + data.description + '</p>' +
                                                               '<p>' + data.votes + '</p>'
 
         }, function errorCallback(response) {

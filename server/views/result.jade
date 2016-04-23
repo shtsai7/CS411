@@ -27,11 +27,33 @@ html.
 
     <body ng-app="myApp">
         <h1 id="title">#{title}</h1>
-        <p id="type">#{type}</p>
 
         <div ng-controller="resultCtrl" ng-init="initPage()">
             <p>
                <img id="wikiImage" src="">
+
+               <table>
+                   <col width="120">
+                   <col width="900">
+                   <tr style="text-align:center">
+                       <td>Title</td>
+                       <td id="title2"></td>
+                   </tr>
+                   <tr style="text-align:center">
+                       <td>Type</td>
+                       <td id="type">#{type}</td>
+                   </tr>
+                   <tr style="text-align:center">
+                       <td >Votes</td>
+                       <td id="votes"></td>
+                   </tr>
+                   <tr style="text-align:center">
+                       <td>Description</td>
+                       <td id="description"></td>
+                   </tr>
+               </table>
+
+
                <div id="wikiResult"></div>
                <div id="userResult"></div>
             </p>
