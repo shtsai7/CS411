@@ -8,11 +8,25 @@ myApp.controller('ctrl', function($scope) {
 myApp.controller('resultCtrl', function($scope,$http) {
 
     $scope.initPage = function() {
-        //  obtain page ID
-        var pageid = document.getElementById("title").innerHTML;
-        $scope.pageid = pageid;
+        // obtain page type
+        var type = document.getElementById("type").innerHTML;
+        $scope.type = type
 
-        $scope.wikiInfo(pageid);
+        if (type == "wiki") {
+            //  obtain page ID
+            var pageid = document.getElementById("title").innerHTML;
+            $scope.pageid = pageid;
+
+            $scope.wikiInfo(pageid);
+        }
+
+        if (type == "user") {
+            var id = document.getElementById("title").innerHTML;
+            $scope.id = id;
+
+            $scope.userInfo(id);
+
+        }
     };
 
     /*
@@ -101,5 +115,32 @@ myApp.controller('resultCtrl', function($scope,$http) {
             }
         });
     };
-    
+
+
+    $scope.userInfo = function(id) {
+
+        var url = '/markers/db/' + id;
+        $http({
+            method: 'GET',
+            url: url,
+        }).then(function successCallback(response) {
+            // this callback will be called asynchronously
+            // when the response is available
+            console.log("get successful");
+            console.log(response.data)
+
+            var data = response.data[0];
+            document.getElementById("title").innerHTML = data.title;
+            document.getElementById("userResult").innerHTML = '<p>' + data.description + '</p>' +
+                                                              '<p>' + data.votes + '</p>'
+
+        }, function errorCallback(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+            console.log("get fail")
+        });
+
+
+    };
+
 });

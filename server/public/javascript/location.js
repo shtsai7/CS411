@@ -433,8 +433,9 @@ myApp.controller('geoCtrl', function($scope,$http) {
                 lat: queries[index].latitude,
                 lng: queries[index].longitude,
                 title: queries[index].title,
-                description: queries[index].description
-            }
+                description: queries[index].description,
+                id: queries[index]._id
+            };
 
             markers[index] = marker;
             var coordinate = {lat: queries[index].latitude, lng: queries[index].longitude};
@@ -455,11 +456,13 @@ myApp.controller('geoCtrl', function($scope,$http) {
                 var position = e.latLng;
                 var title = markers[index].title;
                 var description = markers[index].title;
+                var id = markers[index].id;
 
                 // Need to work on this
                 //var content = '<a href="/result/' + pageid + '" target="_blank">' + title + '</a>';
-                var content = '<h4>' + title + '</h4>' +
-                              '<p>' + description + '</p>';
+                var content = '<a href="/result/user/' + id + '" target="_blank">' + title + '</a>' +
+                              '<p>' + description + '</p>'+
+                              '<p>' + id + '</p>';
 
                 infowindow.setContent(content);
                 infowindow.setPosition(position);

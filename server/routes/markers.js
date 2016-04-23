@@ -50,6 +50,11 @@ router.get('/db/user', function(req, res, next) {
     });
 });
 
+router.get('/db/:id', function(req, res, next) {
+    markers.find({'_id': req.params.id}, function(err, result) {
+        res.json(result);
+    });
+});
 
 router.delete('/db/all', function(req, res, next) {
     markers.find({}).remove(function(err) {
