@@ -1,12 +1,15 @@
-var myApp = angular.module('myApp', []);
+var myApp = angular.module('myApp', ['ngCookies']);
 
 myApp.controller('ctrl', function($scope) {
     $scope.foo = 'foo';
 });
 
 
-myApp.controller('resultCtrl', function($scope,$http) {
+myApp.controller('resultCtrl', function($scope,$http,$cookies) {
 
+    username = $cookies.get("username");
+    document.getElementById("user").innerHTML = username + "<span class=\"caret\"></span>";
+    
     $scope.initPage = function() {
         // obtain page type
         var type = document.getElementById("type").innerHTML;
