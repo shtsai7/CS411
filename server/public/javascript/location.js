@@ -345,8 +345,12 @@ myApp.controller('geoCtrl', function($scope,$http) {
                 lat: queries[index].lat,
                 lng: queries[index].lon,
                 title: queries[index].title,
-                pageid: queries[index].pageid
+                pageid: queries[index].pageid,
+                id: ""
             }
+
+            // save marker to the markers db
+            //var id = $scope.save(marker);
 
             markers[index] = marker
             var coordinate = {lat: queries[index].lat, lng: queries[index].lng};
@@ -368,9 +372,12 @@ myApp.controller('geoCtrl', function($scope,$http) {
 
                 var position = e.latLng;
                 var title = markers[index].title;
+                var pageid = markers[index].pageid;
+                var id = markers[index].id;
 
                 // Need to work on this
-                var content = '<a href="/result/' + pageid + '" target="_blank">' + title + '</a>';
+                var content = '<a href="/result/wiki/' + pageid + '" target="_blank">' + title + '</a>' +
+                    '<p>' + pageid + '  ' + id + '</p>';
 
                 infowindow.setContent(content);
                 infowindow.setPosition(position);
@@ -394,12 +401,13 @@ myApp.controller('geoCtrl', function($scope,$http) {
     };
 
     // display user generated markers on the map
+    // NOT Doing query, will do that later
     $scope.showMarkers = function() {
         var map = $scope.refreshMap();
 
         $http({
             method: 'GET',
-            url: '/markers/db/'
+            url: '/markers/db/user/'
         }).then(function successCallback(response) {
             console.log(response.data);
             $scope.putUserMarker(response.data);
@@ -463,4 +471,43 @@ myApp.controller('geoCtrl', function($scope,$http) {
             addClick(index);
         }
     };
+
+    $scope.save = function(marker) {
+
+        // NEED TO DO INPUT VALIDATION
+
+        var lat = marker.lat;
+        var lng = marker.lng;
+
+        var title = marker.title;
+        var type = "wiki";
+        var description = "";
+        var pageid = marker.pageid;
+
+        var req = {
+            method: 'POST',
+            url: '/markers/db',
+            data:{
+                username: "test",
+                title: title,
+                description: description,
+                type: type,
+                votes: 0,
+                latitude: lat,
+                longitude: lng,
+                pageid: pageid
+            }
+        };
+
+        var id = "";
+        $http(req)
+            .then(function successCallback(response) {
+                id = response.data;
+                console.log("save marker %s to database successfully", title)
+            }, function errorCallback(response) {
+                console.log("save marker %s to database fail", title)
+            });
+
+        
+    }
 });

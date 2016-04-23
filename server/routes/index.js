@@ -17,13 +17,14 @@ router.get('/result', function(req, res, next) {
 //});
 
 /* GET result page. */
-router.get('/result/:pageid', function(req, res, next) {
+router.get('/result/wiki/:pageid', function(req, res, next) {
     console.log(req.params.pageid);
     //res.json(req.params.name);
     var pageid = req.params.pageid;
     res.render('result', 
         {   title: pageid, 
-            content: "ok"
+            content: "ok",
+            type: "wiki"
         })
 });
 

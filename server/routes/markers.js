@@ -12,7 +12,8 @@ var Marker = new Schema({
     type: String,
     votes: Number,
     latitude: Number,
-    longitude: Number
+    longitude: Number,
+    pageid: String
     
 });
 
@@ -25,11 +26,14 @@ router.get('/', function (req, res, next) {
 
 router.post('/db', function (req, res, next) {
     var marker = new markers(req.body);
-    marker.save(function (err) {
+    marker.save(function (err, result) {
         if (err) {
             console.log('error!');
         } else {
-            res.json({message: 'marker saved'});    
+            console.log(result);
+            console.log(result._id);
+            //res.json({message: 'marker saved'});
+            res.json(result._id);
         }    
     });
 });
@@ -39,6 +43,13 @@ router.get('/db', function(req, res, next) {
         res.json(results);
     });
 });
+
+router.get('/db/user', function(req, res, next) {
+    markers.find({'type': {'$ne': "wiki"}}, function(err, result) {
+        res.json(result);
+    });
+});
+
 
 router.delete('/db/all', function(req, res, next) {
     markers.find({}).remove(function(err) {
