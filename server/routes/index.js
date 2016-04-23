@@ -11,6 +11,10 @@ router.get('/result', function(req, res, next) {
     res.render('result', { title: 'Result', content: 'ok' });
 });
 
+router.get('/welcome', function(req, res, next) {
+    res.render('welcome', { title: 'Welcome', content: 'ok' });
+});
+
 //router.post('/result', function(req, res, next) {
 //    console.log("receive post");
 //    res.render('result', {content: req.body.data});
