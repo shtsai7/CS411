@@ -27,7 +27,7 @@ html.
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.js"></script>
     <script src="https://code.angularjs.org/1.5.2/angular-cookies.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPWzKLkH_TcLKa1yDs6oIZeQQdZ7Y8v0A"></script>
-    <script src="../javascript/location.js"></script>
+    <script src="../javascript/welcome.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
@@ -39,7 +39,7 @@ html.
     <body ng-app="myApp">
     <h1 id="title">#{title}</h1>
     <p>#{type}</p>
-
+    <div ng-controller="welcomeCtrl">
     <div class="jumbotron">
     <div class="container">
            <h1>Welcome to WikiGeo!</h1>
@@ -52,4 +52,5 @@ html.
            <p>3. To add a marker - click “Add Marker.” This will bring you a page to confirm your location, or allows you to change your location by clicking somewhere on the map. Below, a form field is available to fill out details about your event. Press the “Save” button to add your event to our database.</p>
            <p>4. To view a marker - click “Show Markers.” This will display the markers that have been added to our database.</p>
            <p>Enjoy our app!</p>
+    </div>
     </div>
