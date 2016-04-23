@@ -8,6 +8,10 @@ myApp.controller('ctrl', function($scope) {
 myApp.controller('resultCtrl', function($scope,$http,$cookies) {
 
     username = $cookies.get("username");
+    //if not logged in, then log out
+    if(!username){
+        window.open("/login");
+    }
     document.getElementById("user").innerHTML = username + "<span class=\"caret\"></span>";
     
     $scope.initPage = function() {

@@ -8,12 +8,11 @@ myApp.controller('ctrl', function ($scope) {
 
 myApp.controller('loginCtrl', function ($scope ,$http, $cookies) {
     
-    //Initially hide sign in form boxes
+    //Initially hide sign in form boxes and remove cookies
     $scope.initLogin = function() {
         document.getElementById("retypePassword").style.display = "none";
         document.getElementById("email").style.display = "none";
-        //document.getElementById("retypePassword").innerHTML = "none";
-        //document.getElementById("email").innerHTML = "none";
+        $cookies.remove("username");
     };
     
     //login button press
@@ -34,6 +33,7 @@ myApp.controller('loginCtrl', function ($scope ,$http, $cookies) {
         }
         console.log($scope.username);
         
+        //if no constraint errors test against database and log in
         if(output.innerHTML == "") {
             console.log($scope.username);
             //test against database
@@ -42,6 +42,7 @@ myApp.controller('loginCtrl', function ($scope ,$http, $cookies) {
             .then(function sucessCallback(response) {
 
                 if (response.data != null) {
+                    console.log(response.data);
                     // we find the info from database
                     alert("User found");
                     $cookies.put("username", $scope.username);
@@ -72,6 +73,10 @@ myApp.controller('loginCtrl', function ($scope ,$http, $cookies) {
             output.innerHTML = "Please enter all fields";
         }
         
+        //length of usernmae
+        if($scope.username <5 || $scope.username > 12){
+            output.innerHTML = "Username must be between 5 and 12 characters";
+        }
         //test length of password
         if($scope.password.length <= 5){
             output.innerHTML = "Password must be at least six characters";

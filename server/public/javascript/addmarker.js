@@ -6,6 +6,10 @@ myApp.controller('ctrl', function($scope) {
 
 myApp.controller('markerCtrl', function($scope,$http, $cookies) {
     var username = $cookies.get("username");
+    //if not logged in, then log out
+    if(!username){
+        window.open("/login");
+    }
     document.getElementById("user").innerHTML = username + "<span class=\"caret\"></span>"
     $scope.save = function() {
 
