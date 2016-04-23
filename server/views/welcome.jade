@@ -1,0 +1,51 @@
+//
+   Created by juliashi on 4/23/16.
+
+doctype html
+html.
+    <head>
+
+      <link rel="stylesheet" type="text/css" href="../../stylesheets/style.css">
+
+      <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+      <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+              <div class="container-fluid">
+                  <ul class="nav navbar-nav">
+                      <li id="welcome"><a href="/welcome">Welcome</a></li>
+                                       <li id="home"><a href="/" onclick="selectTab("home")">Home</a></li>
+                                       <li id="about"><a href="/result">Result</a></li>
+                                      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Eventual Username<span class="caret"></span></a>
+                                           <ul class="dropdown-menu">
+                                               <li><a href="/login">Log Out</a></li>
+                  </ul>
+              </div>
+      </nav>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.js"></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPWzKLkH_TcLKa1yDs6oIZeQQdZ7Y8v0A"></script>
+      <script src="../../javascript/result.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+      <meta charset="UTF-8">
+      <title>#{title}</title>
+
+    </head>
+
+    <body ng-app="myApp">
+    <h1 id="title">#{title}</h1>
+    <p>#{type}</p>
+
+    <div class="jumbotron">
+    <div class="container">
+           <h1>Welcome to WikiGeo!</h1>
+           <p>WikiGeo is an interactive web application that allows you to view nearby famous monuments and past events near you, and also allows you to add your own events. Here’s how to use our app:</p>
+         </div>
+    </div>
+         <div class="content">
+           <p>1.  To view your current location - click “Show my location.”</p>
+           <p>2. You can also click on the map to drop a pin at another location. To view famous monuments and past events near your location, press “WikiGeo.” You can click on the markers that pop up to bring you to a result page that will tell you more about each landmark you choose.</p>
+           <p>3. To add a marker - click “Add Marker.” This will bring you a page to confirm your location, or allows you to change your location by clicking somewhere on the map. Below, a form field is available to fill out details about your event. Press the “Save” button to add your event to our database.</p>
+           <p>4. To view a marker - click “Show Markers.” This will display the markers that have been added to our database.</p>
+           <p>Enjoy our app!</p>
+    </div>
