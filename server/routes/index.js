@@ -36,6 +36,9 @@ router.get('/addmarker/:lat/:lng', function(req, res, next) {
         });
 });
 
+router.get('/login', function(req, res, next) {
+    res.render('login', { title: 'Log In', content: 'ok' });
+});
 
 
 
