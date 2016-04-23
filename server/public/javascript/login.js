@@ -1,14 +1,12 @@
 /*global angular */
-var myApp = angular.module('myApp', []);
-
-
+var myApp = angular.module('myApp',['ngCookies']);
 
 myApp.controller('ctrl', function ($scope) {
     $scope.foo = 'foo';
 });
 
 
-myApp.controller('loginCtrl', function ($scope ,$http) {
+myApp.controller('loginCtrl', function ($scope ,$http, $cookies) {
     
     //Initially hide sign in form boxes
     $scope.initLogin = function() {
@@ -31,13 +29,28 @@ myApp.controller('loginCtrl', function ($scope ,$http) {
         $scope.username = htmlspecialchars($scope.username);
         
         //test if all fields were entered
-        if ($scope.username == "" || $scope.password == ""){
+        if ($scope.username == null || $scope.password == null || $scope.password == "" || $scope.username == ""){
             output.innerHTML = "Please enter username and password";
         }
+        console.log($scope.username);
         
         if(output.innerHTML == "") {
+            console.log($scope.username);
             //test against database
-            output.innerHTML = "testing";
+            var getUrl = "/users/db/" + $scope.username + "/" + $scope.password;
+            $http.get(getUrl)
+            .then(function sucessCallback(response) {
+
+                if (response.data != null) {
+                    // we find the info from database
+                    alert("User found");
+                    $cookies.put("username", $scope.username);
+                    window.open("/");
+                    
+                }else{
+                    alert("User not found");
+                }
+            });
         }
     };
     
@@ -55,7 +68,7 @@ myApp.controller('loginCtrl', function ($scope ,$http) {
         var emailValid = htmlspecialchars(validateEmail($scope.email));
         
         //test if all fields were entered
-        if ($scope.username == "" || $scope.password == "" || $scope.email == "" || $scope.retypePassword ==""){
+        if ($scope.username == null || $scope.password == null || $scope.email == null || $scope.retypePassword == null ||$scope.username == "" || $scope.password == "" || $scope.email == "" || $scope.retypePassword == ""){
             output.innerHTML = "Please enter all fields";
         }
         
@@ -75,10 +88,32 @@ myApp.controller('loginCtrl', function ($scope ,$http) {
         }
         
         if(output.innerHTML == ""){
-            //test against database
-            output.innerHTML = "testing";
-        }
-    };
+            //register user into database
+            var req = {
+            method: 'POST',
+            url: '/users/db',
+            data:{
+                username: $scope.username,
+                password: $scope.password
+            }
+            };
+
+        $http(req)
+            .then(function successCallback(response) {
+                console.log(response.data);
+                console.log(response);
+                console.log("save users %s to database successfully", $scope.username);
+                alert("user saved");
+                //add username to cookies send to main page
+                $cookies.put("username", $scope.username);
+                window.open("/");
+            
+            }, function errorCallback(response) {
+                console.log("save user %s to database fail", $scope.username);
+                alert("error saving to database");
+            });
+        };
+};
     
     function htmlspecialchars(str) {
     if (typeof (str) == "string") {
