@@ -347,7 +347,7 @@ myApp.controller('geoCtrl', function($scope,$http) {
                 title: queries[index].title,
                 pageid: queries[index].pageid,
                 id: ""
-            }
+            };
 
             // save marker to the markers db
             //var id = $scope.save(marker);
@@ -443,7 +443,6 @@ myApp.controller('geoCtrl', function($scope,$http) {
             markers[index]["map"] = new google.maps.Marker({
                 position: {lat: markers[index].lat, lng: markers[index].lng},
                 map: map,
-                //animation: google.maps.Animation.DROP,
                 title: markers[index].title,
                 label: labels[labelIndex++ % labels.length]
             });

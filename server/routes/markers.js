@@ -44,14 +44,23 @@ router.get('/db', function(req, res, next) {
     });
 });
 
+// for show makers
 router.get('/db/user', function(req, res, next) {
     markers.find({'type': {'$ne': "wiki"}}, function(err, result) {
         res.json(result);
     });
 });
 
-router.get('/db/:id', function(req, res, next) {
+// for user result
+router.get('/db/id/:id', function(req, res, next) {
     markers.find({'_id': req.params.id}, function(err, result) {
+        res.json(result);
+    });
+});
+
+// for wiki result
+router.get('/db/pageid/:pageid', function(req, res, next) {
+    markers.find({'pageid': req.params.pageid}, function(err, result) {
         res.json(result);
     });
 });
