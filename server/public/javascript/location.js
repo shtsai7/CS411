@@ -1,12 +1,13 @@
-var myApp = angular.module('myApp', []);
+var myApp = angular.module('myApp', ['ngCookies']);
 
 myApp.controller('ctrl', function($scope) {
 $scope.foo = 'foo';
 });
 
 
-myApp.controller('geoCtrl', function($scope,$http) {
-
+myApp.controller('geoCtrl', function($scope,$http, $cookies) {
+    var username = $cookies.get("username");
+    document.getElementById("user").innerHTML = username + "<span class=\"caret\"></span>"
     //console.log("inside geolocate controller");
 
     /*
