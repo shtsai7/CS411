@@ -28,7 +28,9 @@ html.
     <body ng-app="myApp">
         <h1 id="title">#{title}</h1>
 
-        <div ng-controller="markerCtrl">
+        <div ng-controller="markerCtrl" ng-init="refreshMap()">
+            <div id="out"></div>
+            <div id="map"></div>
             <form name="form">
                 <table>
                     <col width="100">

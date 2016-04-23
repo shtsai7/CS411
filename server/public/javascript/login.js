@@ -14,6 +14,8 @@ myApp.controller('loginCtrl', function ($scope ,$http) {
     $scope.initLogin = function() {
         document.getElementById("retypePassword").style.display = "none";
         document.getElementById("email").style.display = "none";
+        //document.getElementById("retypePassword").innerHTML = "none";
+        //document.getElementById("email").innerHTML = "none";
     };
     
     //login button press
