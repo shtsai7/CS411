@@ -35,6 +35,12 @@ router.get('/db', function(req, res, next) {
     });
 });
 
+router.get('/db/:username', function(req, res, next) {
+    users.find({username: req.params.username }, function(err, results){
+        res.json(results);
+    });
+});
+
 router.get('/db/:username/:password', function(req, res, next) {
     users.find({username: req.params.username, password: req.params.password}, function(err, results){
         res.json(results);

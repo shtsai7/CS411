@@ -41,7 +41,7 @@ myApp.controller('loginCtrl', function ($scope ,$http, $cookies) {
             $http.get(getUrl)
             .then(function sucessCallback(response) {
 
-                if (response.data != null) {
+                if (response.data.length != 0) {
                     console.log(response.data);
                     // we find the info from database
                     alert("User found");
@@ -50,6 +50,7 @@ myApp.controller('loginCtrl', function ($scope ,$http, $cookies) {
                     
                 }else{
                     alert("User not found");
+                    console.log(response.data);
                 }
             });
         }
@@ -92,32 +93,48 @@ myApp.controller('loginCtrl', function ($scope ,$http, $cookies) {
             output.innerHTML = "Please enter valid email address";
         }
         
-        if(output.innerHTML == ""){
-            //register user into database
-            var req = {
-            method: 'POST',
-            url: '/users/db',
-            data:{
-                username: $scope.username,
-                password: $scope.password
-            }
-            };
+        //test if username already taken, else post to database
+        if(output.innerHTML == "") {
+            console.log($scope.username);
+            //test against database
+            var getUrl = "/users/db/" + $scope.username;
+            $http.get(getUrl)
+            .then(function sucessCallback(response) {
 
-        $http(req)
-            .then(function successCallback(response) {
-                console.log(response.data);
-                console.log(response);
-                console.log("save users %s to database successfully", $scope.username);
-                alert("user saved");
-                //add username to cookies send to main page
-                $cookies.put("username", $scope.username);
-                window.open("/");
+                if (response.data.length != 0) {
+                    console.log(response.data);
+                    // we find the info from database
+                    output.innerHTML = "Username already taken";
+                }else{
+                    //register user into database
+                    var req = {
+                    method: 'POST',
+                    url: '/users/db',
+                    data:{
+                    username: $scope.username,
+                    password: $scope.password
+                }
+                };
+
+                    $http(req)
+                    .then(function successCallback(response) {
+                    console.log(response.data);
+                    console.log(response);
+                    console.log("save users %s to database successfully", $scope.username);
+                    alert("user saved");
+                    //add username to cookies send to main page
+                    $cookies.put("username", $scope.username);
+                    window.open("/");
             
-            }, function errorCallback(response) {
-                console.log("save user %s to database fail", $scope.username);
-                alert("error saving to database");
+                    }, function errorCallback(response) {
+                    console.log("save user %s to database fail", $scope.username);
+                    alert("error saving to database");
+                    });
+                }
+                    
             });
-        };
+        }
+        
 };
     
     function htmlspecialchars(str) {
