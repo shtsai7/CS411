@@ -14,6 +14,9 @@ myApp.controller('geoCtrl', function($scope,$http, $cookies) {
     document.getElementById("user").innerHTML = username + "<span class=\"caret\"></span>"
     //console.log("inside geolocate controller");
 
+    $scope.labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $scope.labelIndex = 0;
+
     /*
         Initialize map when open page
 
@@ -253,7 +256,7 @@ myApp.controller('geoCtrl', function($scope,$http, $cookies) {
             latS +
             "|" +
             lonS +
-            "&gsradius=10000&gslimit=30&callback=?";
+            "&gsradius=10000&gslimit=26&callback=?";
         
         $.ajax({
             type: "GET",
@@ -412,8 +415,23 @@ myApp.controller('geoCtrl', function($scope,$http, $cookies) {
             method: 'GET',
             url: '/markers/db/user/'
         }).then(function successCallback(response) {
-            console.log(response.data);
+
+            var queries = []
+            for (var index in response.data) {
+                var query = {
+                    title: [],
+                    lat: [],
+                    lon: []
+                };
+                query.title = response.data[index].title;
+                query.lat = response.data[index].latitude;
+                query.lon = response.data[index].longitude;
+                queries[index] = query;
+            }
+            $scope.queries = queries;
+            //console.log(response.data);
             $scope.putUserMarker(response.data);
+
         }, function errorCallback(response) {
             console.log("get markers from db fail");
         });

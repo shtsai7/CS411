@@ -53,19 +53,15 @@ html.
           </p>
 
           <p>
-              Page ID: <input ng-model="pageID">
-              <button ng-click="wikiInfo(pageID)">wikiInfo</button> <br>
-
               <div id="wikiGeoResult">
-                  <div id="welcome">Welcome</div>
                   <table>
-                      <th>Title</th>
-                      <th>Page ID</th>
-                      <th>Latitude</th>
-                      <th>Longitude</th>
+                      <th style="width:30px" style="text-align:center">Label</th>
+                      <th style="width:500px">Title</th>
+                      <th style="width:130px">Latitude</th>
+                      <th style="width:130px">Longitude</th>
                       <tr ng-repeat="query in queries">
+                          <td style="text-align:center">{{labels[$index]}}</td>
                           <td>{{query.title}}</td>
-                          <td>{{query.pageid}}</td>
                           <td>{{query.lat}}</td>
                           <td>{{query.lon}}</td>
                       </tr>
