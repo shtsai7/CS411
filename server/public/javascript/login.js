@@ -44,12 +44,11 @@ myApp.controller('loginCtrl', function ($scope ,$http, $cookies) {
                 if (response.data.length != 0) {
                     console.log(response.data);
                     // we find the info from database
-                    alert("User found");
                     $cookies.put("username", $scope.username);
                     window.open("/");
                     
                 }else{
-                    alert("User not found");
+                    output.innerHTML = "Username or password incorrect"
                     console.log(response.data);
                 }
             });
