@@ -27,6 +27,49 @@ html.
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
+  <style>
+   body {
+       background: url('https://soffk7.files.wordpress.com/2013/01/new-york-city.jpg') no-repeat;
+       background-size: cover;
+     }
+  body:before {
+       content:"";
+        display:block;
+        position:fixed;
+        width:100%;
+        height:100%;
+        left:0;
+        top:0;
+        z-index:-1;
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+
+
+
+  </style>
+
+
+  <script>
+       @media ( min-width: 768px ) {
+            .grid-divider {
+                position: relative;
+                padding: 0;
+            }
+            .grid-divider>[class*='col-'] {
+                position: static;
+            }
+            .grid-divider>[class*='col-']:nth-child(n+2):before {
+                content: "";
+                border-left: 1px solid #DDD;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+            }
+            .col-padding {
+                padding: 0 15px;
+            }
+        }
+       </script>
 
     <meta charset="UTF-8">
     <title>#{title}</title>
@@ -34,44 +77,80 @@ html.
   </head>
 
   <body ng-app="myApp">
-      <h1>#{title}</h1>
+      <center><font color="white"><h1>#{title} Application</h1></font></center>
 
       <div ng-controller="geoCtrl" ng-init="geoFindMe()">
           <p>
-              <button ng-click="geoFindMe()">Show my location</button>
-              <button ng-click="wikiGeo()">wikiGeo</button>
-              <button ng-click="addMarkerPage()">Add Marker</button>
-              <button ng-click="showMarkers()">Show Markers</button><br>
-
-              <div id="out"></div>
-              <div id="map"></div>
+        <center><div class="btn-group">
+              <button ng-click="geoFindMe()" class="btn btn-primary" btn-lg >Show my location</button>
+              <button ng-click="wikiGeo()" class="btn btn-primary" btn-lg >wikiGeo</button>
+              <button ng-click="addMarkerPage()" class="btn btn-primary" btn-lg >Add Marker</button>
+              <button ng-click="showMarkers()" class="btn btn-primary" btn-lg>Show Markers</button><br>
+        </div></center>
+          <center><div id="out"></div></center>
+          <center><div id="map"></div></center>
           </p>
 
           <p>
-              <img id="wikiImage" src="">
-              <div id="wikiResult"></div>
+              <center><img id="wikiImage" src=""></center>
+              <center><div id="wikiResult"></div></center>
           </p>
 
+
+   <div class="container">
+        <div class="page-header">
+            <center><font color="white"><h3>Learn how to use AroundMe in a few simple steps...</h3></font></center>
+        </div>
+        <div class="row grid-divider">
+        <div class="col-sm-4">
+          <div class="col-padding">
+            <h3><font color="white">Step 1</font></h3>
+            <p><font color="white">To view your current location - click “Show my location.”</font></p>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="col-padding">
+            <h3><font color="white">Step 2</font></h3>
+            <p><font color="white">To view famous monuments and past events near your location, press “WikiGeo.” You can click on the markers that pop up to bring you to a result
+            page that will tell you more about each landmark you choose.</font>
+            </p>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="col-padding">
+            <h3><font color="white">Step 3</font></h3>
+            <p><font color="white">To add a marker - click “Add Marker.” This will bring you a page to confirm your location, or allows you to change your location by clicking somewhere on the map.
+               To view a marker - click “Show Markers.” This will display the markers that have been added to our database.</font>
+            </p>
+            <br>
+            <br>
+            <br>
+            <br>
+          </div>
+        </div>
+        </div>
+
+    </div>
           <p>
               <div id="wikiGeoResult">
-                  <table>
-                      <th style="width:30px" style="text-align:center">Label</th>
-                      <th style="width:500px">Title</th>
-                      <th style="width:130px">Latitude</th>
-                      <th style="width:130px">Longitude</th>
+                  <center><table>
+                      <th style="width:30px" style="text-align:center"><font color="white">Label</th>
+                      <th style="width:500px"><font color="white">Title</font></th>
+                      <th style="width:130px"><font color="white">Latitude</font></th>
+                      <th style="width:130px"><font color="white">Longitude</font></th>
                       <tr ng-repeat="query in queries">
-                          <td style="text-align:center">{{labels[$index]}}</td>
-                          <td>{{query.title}}</td>
-                          <td>{{query.lat}}</td>
-                          <td>{{query.lon}}</td>
+                          <td style="text-align:center"><font color="white">{{labels[$index]}}</font></td>
+                          <td><font color="white">{{query.title}}</font></td>
+                          <td><font color="white">{{query.lat}}</font></td>
+                          <td><font color="white">{{query.lon}}</font></td>
                       </tr>
                   </table>
+                </center>
 
 
               </div>
           </p>
       </div>
-
 
   </body>
 

@@ -32,39 +32,93 @@ html.
 
     </head>
 
+    <style>
+      body {
+          background: url('http://www.minimit.com/images/picjumbo.com_IMG_6648.jpg') no-repeat;
+          background-size: cover;
+        }
+     body:before {
+          content:"";
+           display:block;
+           position:fixed;
+           width:100%;
+           height:100%;
+           left:0;
+           top:0;
+           z-index:-1;
+           background-color: rgba(0, 0, 0, 0.3);
+       }
+
+
+
+     </style>
+
     <body ng-app="myApp">
-        <h1 id="title">#{title}</h1>
+        <center><font color="white"><h1 id="title">#{title}</h1></font></center>
 
         <div ng-controller="markerCtrl" ng-init="refreshMap()">
-            <div id="out"></div>
-            <div id="map"></div>
-            <form name="form">
-                <table>
-                    <col width="100">
-                    <col width="300">
+            <center><div id="out"></div></center>
+            <center><div id="map"></div></center>
 
-                    <tr>
-                        <td height="30">Latitude</td>
-                        <td height="30" id="lat">#{lat}</td>
-                    </tr>
-                    <tr>
-                        <td height="30">Longitude</td>
-                        <td height="30" id="lng">#{lng}</td>
-                    </tr>
-                    <tr>
-                        <td height="30">Title</td>
-                        <td height="30"><input type="text" ng-model="markerTitle"></td>
-                    </tr>
-                    <tr>
-                        <td height="30">Type</td>
-                        <td height="30"><input type="text" ng-model="markerType"></td>
-                    </tr>
-                    <tr>
-                        <td height="100">Description</td>
-                        <td height="100"><textarea rows="4" cols="50" ng-model="markerDescription"></textarea></td>
-                    </tr>
-                </table>
-                <button ng-click="save()">Save</button>
+
+    <div class="container">
+         <div class="page-header">
+              <center><h3><font color="white">Enter descriptions for your tag below</font></h3></center>
+          </div>
+          <div class="row grid-divider">
+    </div>
+    </div>
+    </div>
+
+    <form class="form-horizontal">
+     <fieldset>
+
+    <div class="form-group">
+                 <label class="col-md-4 control-label" for="searchinput"><font color="white">Latitude</font></label>
+                <font color="white"><div id="lat">#{lat}</div></font>
+                </div>
+
+    <div class="form-group">
+                <label class="col-md-4 control-label" for="searchinput"><font color="white">Longitude</font></label>
+                <font color="white"><div id="lng">#{lng}</div></font>
+                </div>
+
+    <div class="form-group">
+            <label class="col-md-4 control-label" for="searchinput"><font color="white">Title</font></label>
+            <div class="col-md-4">
+              <input type="text" ng-model="markerTitle" placeholder="Title" class="form-control input-md">
+
+            </div>
+          </div>
+
+    <div class="form-group">
+            <label class="col-md-4 control-label" for="searchinput"><font color="white">Type</font></label>
+            <div class="col-md-4">
+              <input type="text" ng-model="markerType" placeholder="Type" class="form-control input-md">
+
+            </div>
+          </div>
+
+    <div class="form-group">
+       <label class="col-md-4 control-label" for="textarea"><font color="white">Description</font></label>
+       <div class="col-md-4">
+         <textarea class="form-control" ng-model="markerDescription" placeholder="Text here">Text here</textarea>
+       </div>
+     </div>
+
+
+    <center>
+        <button ng-click="save()" class="btn btn-lg btn-success">Save</button>
+    </center>
+
+    <br>
+    <br>
+
+                </fieldset>
             </form>
-        </div>
+         </div>
+     </div>
+     </div>
+
+
     </body>
