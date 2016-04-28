@@ -33,36 +33,46 @@ html.
     </head>
 
     <body ng-app="myApp">
-        <h1 id="title">#{title}</h1>
+        <center><h1 id="title">#{title}</h1></center>
 
         <div ng-controller="resultCtrl" ng-init="initPage()">
             <p>
-               <img id="wikiImage" src="">
-
-               <table>
-                   <col width="120">
-                   <col width="900">
-                   <tr style="text-align:center">
-                       <td>Title</td>
-                       <td id="title2"></td>
-                   </tr>
-                   <tr style="text-align:center">
-                       <td>Type</td>
-                       <td id="type">#{type}</td>
-                   </tr>
-                   <tr style="text-align:center">
-                       <td >Votes</td>
-                       <td id="votes"></td>
-                   </tr>
-                   <tr style="text-align:center">
-                       <td>Description</td>
-                       <td id="description"></td>
-                   </tr>
-               </table>
+               <center><img id="wikiImage" src=""></center>
 
 
-               <div id="wikiResult"></div>
-               <div id="userResult"></div>
-            </p>
+
+    <div class="container">
+              <div class="page-header">
+    <div class="row grid-divider">
+        <div class="col-md-1">
+              <b>Type:</b>
         </div>
+        <div class="col-md-1">
+            <div id="type">#{type}</div>
+        </div>
+        </div>
+    </div>
+    </div>
+
+
+    <div class="container">
+    <div class="col-md-12">
+    <div class="row grid-divider">
+
+
+        <h1><div id="title2"></div></h1>
+        <p>
+        <div id="description">
+        </div>
+        </p>
+
+    <div id="wikiResult"></div>
+    <div id="userResult"></div>
+    </div>
+    </div>
+
+    
+
+
+    </div>
     </body>
