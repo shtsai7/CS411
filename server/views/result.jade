@@ -31,16 +31,48 @@ html.
       <title>#{title}</title>
 
     </head>
+    
+     <style>
+           body {
+               background: url('https://static.pexels.com/photos/1380/black-and-white-city-skyline-buildings.jpg')center center no-repeat;
+               background-size: cover;
+               color: #000;
+              background-attachment: fixed;
+             }
+          body:before {
+               content:"";
+                display:block;
+                position:fixed;
+                width:100%;
+                height:100%;
+                left:0;
+                top:0;
+                z-index:-1;
+                background-color: rgba(0, 0, 0, 0.3);
+            }
+            div.transbox {
+                margin: 30px;
+                background-color: #ffffff;
+                border: 1px solid black;
+                opacity: 0.6;
+                filter: alpha(opacity=60);
+            }
+            div.transbox p {
+            margin: 8%;
+            color: #000000;
+            }
+    </style>
+    
 
     <body ng-app="myApp">
-        <center><h1 id="title">#{title}</h1></center>
+        <center><h1 id="title" style="color:white;">#{title}</h1></center>
 
         <div ng-controller="resultCtrl" ng-init="initPage()">
             <p>
                <center><img id="wikiImage" src=""></center>
 
 
-
+    <div class = transbox>
     <div class="container">
               <div class="page-header">
     <div class="row grid-divider">
@@ -73,6 +105,6 @@ html.
 
 
 
-
+    </div>
     </div>
     </body>
