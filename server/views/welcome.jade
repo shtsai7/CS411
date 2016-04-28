@@ -1,14 +1,15 @@
-//
-   Created by juliashi on 4/23/16.
-
 doctype html
 html.
     <head>
 
       <link rel="stylesheet" type="text/css" href="../../stylesheets/style.css">
+      
+      <link href='https://fonts.googleapis.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+      <link href='https://fonts.googleapis.com/css?family=Cardo:400italic' rel='stylesheet' type='text/css'>
 
       <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+      
       <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
               <div class="container-fluid">
                   <ul class="nav navbar-nav">
@@ -32,24 +33,51 @@ html.
 
       <meta charset="UTF-8">
       <title>#{title}</title>
+      
+      <style>
+        p { text-align:center; }
+        h1 { text-align:center; }
+    </style>
+
+    <style>
+      H1 {
+       font-family :'Montserrat', sans-serif;
+       }
+        p {
+        font-family : Cardo;
+        }
+    </style>
 
     </head>
 
-    <body ng-app="myApp">
-    <h1 id="title">#{title}</h1>
-    <p>#{type}</p>
-    <div ng-controller="welcomeCtrl">
-    <div class="jumbotron">
-    <div class="container">
-           <h1>Welcome to WikiGeo!</h1>
-           <p>WikiGeo is an interactive web application that allows you to view nearby famous monuments and past events near you, and also allows you to add your own events. Here’s how to use our app:</p>
+     <style>
+           body {
+               background: url('http://phandroid.s3.amazonaws.com/wp-content/uploads/2014/12/city-wallpaper-1.jpg')center center no-repeat;
+               background-size: cover;
+               color: #fff;
+             }
+          body:before {
+               content:"";
+                display:block;
+                position:fixed;
+                width:100%;
+                height:100%;
+                left:0;
+                top:0;
+                z-index:-1;
+                background-color: rgba(0, 0, 0, 0.3);
+            }
+    </style>
+
+
+    <body style="width: 100%; height: 100%;">
+
+         <div style="top: 50%; left: 50%; position: absolute; transform: translateX(-50%) translateY(-50%);">
+             <div>
+                <p><i><big><big>Have you ever wondered what's around you?</big></big></i></p>
+                <h1><b><big><big>WELCOME TO WIKIGEO.</big></big></b></h1>
+                <p ><i><big><big>Find new places in an unfamiliar landscape. Explore the secrets of your city</i>.</big></big></p>
+                <p><i><big><big>See something interesting? Mark it with WikiGeo</i>.</big></big></p>
+              </div>
          </div>
-    </div>
-         <div class="content">
-           <p>1.  To view your current location - click “Show my location.”</p>
-           <p>2. You can also click on the map to drop a pin at another location. To view famous monuments and past events near your location, press “WikiGeo.” You can click on the markers that pop up to bring you to a result page that will tell you more about each landmark you choose.</p>
-           <p>3. To add a marker - click “Add Marker.” This will bring you a page to confirm your location, or allows you to change your location by clicking somewhere on the map. Below, a form field is available to fill out details about your event. Press the “Save” button to add your event to our database.</p>
-           <p>4. To view a marker - click “Show Markers.” This will display the markers that have been added to our database.</p>
-           <p>Enjoy our app!</p>
-    </div>
-    </div>
+    </body>
